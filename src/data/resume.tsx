@@ -12,7 +12,7 @@ import { Kubernetes } from "@/components/ui/svgs/kubernetes";
 import { Astro } from "@/components/ui/svgs/astro";
 
 export const DATA = {
-  name: "Alex Mercer - Software Engineer",
+  name: "小帅 - Software Engineer",
   initials: "AM",
   url: "https://alexmercer.dev",
   location: "Austin, TX",
@@ -35,13 +35,13 @@ export const DATA = {
       text: "I've worked on a variety of projects, from simple websites to complex web applications. Here are a few of my favorites.",
     },
     hackathons: {
-      order: 7, enabled: true,
+      order: 7, enabled: false,
       label: "Hackathons",
       heading: "I like building things",
       text: "During my time in university, I attended {count}+ hackathons. People from around the country would come together and build incredible things in 2-3 days. It was eye-opening to see the endless possibilities brought to life by a group of motivated and passionate individuals.",
     },
     photos: {
-      order: 6, enabled: true,
+      order: 6, enabled: false,
       heading: "My Recent Travels",
     },
     contact: {
@@ -79,12 +79,12 @@ export const DATA = {
     { href: "/blog", icon: Library, label: "Blog" },
   ],
   contact: {
-    email: "alex@alexmercer.dev",
+    email: "734966492@qq.com",
     tel: "+1 512 000 0000",
     social: {
       GitHub: {
         name: "GitHub",
-        url: "https://github.com",
+        url: "https://github.com/meyjsolo",
         icon: Icons.github,
         navbar: true,
       },
@@ -92,25 +92,25 @@ export const DATA = {
         name: "LinkedIn",
         url: "https://linkedin.com",
         icon: Icons.linkedin,
-        navbar: true,
+        navbar: false,
       },
       X: {
         name: "X",
         url: "https://x.com",
         icon: Icons.x,
-        navbar: true,
+        navbar: false,
       },
       Youtube: {
         name: "Youtube",
         url: "https://youtube.com",
         icon: Icons.youtube,
-        navbar: true,
+        navbar: false,
       },
       email: {
         name: "Send Email",
-        url: "mailto:alex@alexmercer.dev",
+        url: "mailto:734966492@qq.com",
         icon: Icons.email,
-        navbar: false,
+        navbar: true,
       },
     },
   },
@@ -191,36 +191,12 @@ export const DATA = {
   ],
   education: [
     {
-      school: "Founder Fellowship SF",
-      href: "https://foundersfellowship.io",
-      degree: "Cohort 4 - Founder in Residence",
-      logoUrl: "https://avatar.vercel.sh/founder-fellowship?size=40",
-      start: "2023",
-      end: "2023",
-    },
-    {
-      school: "University of British Columbia",
-      href: "https://ubc.ca",
-      degree: "Bachelor of Science, Computer Science",
-      logoUrl: "https://www.google.com/s2/favicons?domain=ubc.ca&sz=128",
-      start: "2018",
-      end: "2023",
-    },
-    {
-      school: "Simon Fraser University",
-      href: "https://sfu.ca",
-      degree: "Bachelor of Business Administration",
-      logoUrl: "https://www.google.com/s2/favicons?domain=sfu.ca&sz=128",
-      start: "2018",
-      end: "2023",
-    },
-    {
-      school: "International Baccalaureate",
-      href: "https://ibo.org",
-      degree: "IB Diploma",
-      logoUrl: "https://www.google.com/s2/favicons?domain=ibo.org&sz=128",
-      start: "2014",
-      end: "2018",
+      school: "中南大学",
+      href: "https://www.csu.edu.cn/",
+      degree: "本科",
+      logoUrl: "https://cdn.urongda.com/images/normal/medium/central-south-university-logo-1024px.png",
+      start: "2009",
+      end: "2013",
     },
   ],
   projects: [
