@@ -10,6 +10,11 @@ import { Postgresql } from "@/components/ui/svgs/postgresql";
 import { Docker } from "@/components/ui/svgs/docker";
 import { Kubernetes } from "@/components/ui/svgs/kubernetes";
 import { Astro } from "@/components/ui/svgs/astro";
+import { Java } from "@/components/ui/svgs/java";
+import { Linux } from "@/components/ui/svgs/linux";
+import { Spring } from "@/components/ui/svgs/spring";
+import { Redis } from "@/components/ui/svgs/redis";
+import { Nginx } from "@/components/ui/svgs/nginx";
 
 export const DATA = {
   name: "小帅 - Software Engineer",
@@ -18,16 +23,16 @@ export const DATA = {
   location: "Austin, TX",
   locationLink: "https://www.google.com/maps/place/austin+tx",
   description:
-    "Full-stack engineer turned indie founder. I love building developer tools, fast UIs, and products people actually use.",
+    "全栈工程师，喜欢创建真正有用的产品。",
   summary:
-    "In early 2023, I left a senior engineering role to go all-in on building my own SaaS products. Before that, [I completed a double degree in computer science and business](/#education), [interned at companies like Stripe and Cloudflare](/#work), and [competed in 18+ hackathons](/#hackathons). I also spent a summer in San Francisco as part of a founder residency focused on shipping fast and finding early customers.",
+    "1. 10+ 年后端开发，懂前端，会运维。\n2. 熟练使用 Linux，能单人搭建一个项目需要的所有服务（包括各种中间件），且有基本的运维能力。\n3. 有架构设计经验，参与过多个系统从 0 到 1 的建设，熟悉微服务、大数据。\n4. 做过后台管理系统，应用监控系统，日志中心，交易系统，用户画像系统，用户行为分析系统，大数据平台，DevOps 等。\n5. Vibe coding。\n6. 目前全职远程/自由职业。",
   avatarUrl: "/picofme.png",
   ogImage: "/og_image.png",
   sections: {
     about: { order: 1, enabled: true, heading: "About" },
-    work: { order: 2, enabled: true, heading: "Work Experience", presentLabel: "Present" },
-    education: { order: 3, enabled: true, heading: "Education" },
-    skills: { order: 4, enabled: true, heading: "Skills" },
+    skills: { order: 2, enabled: true, heading: "Skills" },
+    work: { order: 3, enabled: true, heading: "Work Experience", presentLabel: "Present" },
+    education: { order: 4, enabled: true, heading: "Education" },
     projects: {
       order: 5, enabled: true,
       label: "My Projects",
@@ -63,16 +68,15 @@ export const DATA = {
     { src: "/photos/photo9.jpg", alt: "Photo 9" },
   ],
   skills: [
-    { name: "Astro", icon: Astro },
-    { name: "React", icon: ReactLight },
-    { name: "Next.js", icon: NextjsIconDark },
+    { name: "Java", icon: Java },
+    { name: "Spring", icon: Spring },
+    { name: "Postgres", icon: Postgresql },
+    { name: "Redis", icon: Redis },
     { name: "Typescript", icon: Typescript },
     { name: "Node.js", icon: Nodejs },
-    { name: "Python", icon: Python },
-    { name: "Go", icon: Golang },
-    { name: "Postgres", icon: Postgresql },
+    { name: "Linux", icon: Linux },
     { name: "Docker", icon: Docker },
-    { name: "Kubernetes", icon: Kubernetes },
+    { name: "Nginx", icon: Nginx },
   ],
   navbar: [
     { href: "/", icon: House, label: "Home" },
@@ -106,7 +110,7 @@ export const DATA = {
         icon: Icons.youtube,
         navbar: false,
       },
-      email: {
+      Email: {
         name: "Send Email",
         url: "mailto:734966492@qq.com",
         icon: Icons.email,
