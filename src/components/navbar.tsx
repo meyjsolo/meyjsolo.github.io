@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Dock, DockIcon } from "@/components/magicui/dock";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Separator } from "@/components/ui/separator";
@@ -8,9 +9,13 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
+import { X } from "lucide-react";
 
 export default function Navbar() {
+  const [qrOpen, setQrOpen] = useState<string | null>(null);
+
   return (
+    <>
     <div className="pointer-events-none fixed inset-x-0 bottom-4 z-30">
       <Dock className="z-50 pointer-events-auto relative h-14 p-2 w-fit mx-auto flex gap-2 border bg-card/90 backdrop-blur-3xl shadow-[0_0_10px_3px] shadow-primary/5">
         {DATA.navbar.map((item) => {
@@ -46,8 +51,57 @@ export default function Navbar() {
         {Object.entries(DATA.contact.social)
           .filter(([_, social]) => social.navbar)
           .map(([name, social], index) => {
-            const isExternal = social.url.startsWith("http");
             const IconComponent = social.icon;
+            if ("type" in social && social.type === "qrcode") {
+              return (
+                <div key={`social-${name}-${index}`} className="relative">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        type="button"
+                        aria-label={social.name}
+                        onClick={() =>
+                          setQrOpen(qrOpen === name ? null : name)
+                        }
+                      >
+                        <DockIcon className="rounded-3xl cursor-pointer size-full bg-background p-0 text-foreground hover:text-foreground hover:bg-muted backdrop-blur-3xl border border-border transition-colors">
+                          <IconComponent className="size-full rounded-sm overflow-hidden object-contain" />
+                        </DockIcon>
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent
+                      side="top"
+                      sideOffset={8}
+                      className="rounded-xl bg-primary text-primary-foreground px-4 py-2 text-sm shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]"
+                    >
+                      <p>{name}</p>
+                      <TooltipArrow className="fill-primary" />
+                    </TooltipContent>
+                  </Tooltip>
+                  {qrOpen === name && (
+                    <div className="absolute bottom-full left-1/2 z-50 mb-3 w-max -translate-x-1/2">
+                      <div className="relative rounded-xl border border-border bg-card p-3 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]">
+                        <button
+                          type="button"
+                          aria-label="Close"
+                          onClick={() => setQrOpen(null)}
+                          className="absolute -right-2 -top-2 rounded-full border border-border bg-background p-1 text-foreground shadow-sm hover:bg-muted transition-colors"
+                        >
+                          <X className="size-4" />
+                        </button>
+                        <img
+                          src={social.value}
+                          alt={social.name}
+                          className="size-48 rounded-lg object-contain"
+                        />
+                        <div className="absolute -bottom-1 left-1/2 size-2 -translate-x-1/2 rotate-45 border-b border-r border-border bg-card" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            }
+            const isExternal = social.url.startsWith("http");
             return (
               <Tooltip key={`social-${name}-${index}`}>
                 <TooltipTrigger asChild>
@@ -93,5 +147,6 @@ export default function Navbar() {
         </Tooltip>
       </Dock>
     </div>
+    </>
   );
 }

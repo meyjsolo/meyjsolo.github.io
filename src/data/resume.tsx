@@ -116,6 +116,20 @@ export const DATA = {
         icon: Icons.email,
         navbar: true,
       },
+      WeChat: {
+        name: "WeChat",
+        type: "qrcode",
+        icon: Icons.wechat,
+        navbar: true,
+        value: "/contact/wechat-qr.jpeg",
+      },
+      QQ: {
+        name: "QQ",
+        type: "qrcode",
+        icon: Icons.qq,
+        navbar: true,
+        value: "/contact/qq-qr.png",
+      },
     },
   },
 
