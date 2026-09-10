@@ -123,6 +123,13 @@ export const DATA = {
         navbar: true,
         value: "/contact/wechat-qr.jpeg",
       },
+      QQ: {
+        name: "QQ",
+        type: "qrcode",
+        icon: Icons.qq,
+        navbar: true,
+        value: "/contact/qq-qr.png",
+      },
     },
   },
 

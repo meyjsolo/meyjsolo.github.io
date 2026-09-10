@@ -12,7 +12,7 @@ import { DATA } from "@/data/resume";
 import { X } from "lucide-react";
 
 export default function Navbar() {
-  const [qrOpen, setQrOpen] = useState(false);
+  const [qrOpen, setQrOpen] = useState<string | null>(null);
 
   return (
     <>
@@ -60,7 +60,9 @@ export default function Navbar() {
                       <button
                         type="button"
                         aria-label={social.name}
-                        onClick={() => setQrOpen(!qrOpen)}
+                        onClick={() =>
+                          setQrOpen(qrOpen === name ? null : name)
+                        }
                       >
                         <DockIcon className="rounded-3xl cursor-pointer size-full bg-background p-0 text-foreground hover:text-foreground hover:bg-muted backdrop-blur-3xl border border-border transition-colors">
                           <IconComponent className="size-full rounded-sm overflow-hidden object-contain" />
@@ -76,13 +78,13 @@ export default function Navbar() {
                       <TooltipArrow className="fill-primary" />
                     </TooltipContent>
                   </Tooltip>
-                  {qrOpen && (
+                  {qrOpen === name && (
                     <div className="absolute bottom-full left-1/2 z-50 mb-3 w-max -translate-x-1/2">
                       <div className="relative rounded-xl border border-border bg-card p-3 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.3)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]">
                         <button
                           type="button"
                           aria-label="Close"
-                          onClick={() => setQrOpen(false)}
+                          onClick={() => setQrOpen(null)}
                           className="absolute -right-2 -top-2 rounded-full border border-border bg-background p-1 text-foreground shadow-sm hover:bg-muted transition-colors"
                         >
                           <X className="size-4" />
