@@ -83,7 +83,7 @@ export const DATA = {
     { href: "/blog", icon: Library, label: "Blog" },
   ],
   contact: {
-    email: "734966492@qq.com",
+    email: "meyj-solo@foxmail.com",
     tel: "+1 512 000 0000",
     social: {
       GitHub: {
@@ -112,7 +112,7 @@ export const DATA = {
       },
       Email: {
         name: "Send Email",
-        url: "mailto:734966492@qq.com",
+        url: "mailto:meyj-solo@foxmail.com",
         icon: Icons.email,
         navbar: true,
       },
