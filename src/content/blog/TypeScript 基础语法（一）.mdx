@@ -1,0 +1,120 @@
+---
+title: "TypeScript 基础语法（一）"
+publishedAt: "2026-09-10"
+updatedAt: "2026-09-10"
+author: "小帅"
+summary: "TypeScript 基础语法。"
+---
+
+## 1. 类型声明
+
+```TypeScript
+// 变量: 类型
+let name: string = 'Tom';
+let age: number = 20;
+```
+
+## 2. TS 的基本类型
+
+```TypeScript
+string
+number
+boolean
+null
+undefined
+bigint
+symbol
+
+// 不指定类型，尽量少用
+any
+```
+
+## 3. 类型推断
+
+```TypeScript
+let name = 'Tom';
+let age = 20;
+
+// 不指定类型 TS 也能自动推断出变量类型
+name: string
+age: number 
+
+// 所以 TS 中通常这么写代码
+const name = 'Tom';
+const age = 20;
+```
+
+## 4. 函数参数类型
+
+```TypeScript
+function add(a: number, b: number): number {
+    return a + b;
+}
+```
+
+## 5. 可选参数
+
+```TypeScript
+// ? 表示这个参数可以不传
+// name?: string 等价于 name: string | undefined
+function hello(name?: string) {
+
+}
+```
+
+## 6. Union Type 联合类型
+
+```TypeScript
+let value: string | number;
+
+// 下面两种赋值都合法，其他类型的赋值不合法
+value = 'value';
+value = 123;
+```
+
+## 7. 数组
+
+```TypeScript
+let names: string[] = ['Tome', 'Jerry'];
+
+let names: Array<string> = ['Tome', 'Jerry'];
+
+let numbers: number[] = [1, 2, 3];
+
+let values: (string | number)[] = [
+    "hello",
+    123
+];
+```
+
+## 8. Tuple 元组
+
+```TypeScript
+let user: [string, number] = ['Tom', 20];
+```
+
+## 9. Object 类型
+
+```TypeScript
+let user: {
+    name: string;
+    age: number;
+} = {
+    name: "Tom",
+    age: 20
+};
+```
+
+## 10. interface
+
+```TypeScript
+interface User {
+    name: string;
+    age: number;
+}
+
+const user: User = {
+    name: "Tom",
+    age: 20
+};
+```
