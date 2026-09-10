@@ -23,7 +23,7 @@ export const DATA = {
   location: "Austin, TX",
   locationLink: "https://www.google.com/maps/place/austin+tx",
   description:
-    "全栈工程师，喜欢创建真正有用的产品。",
+    "全栈工程师，做真正有用的产品。",
   summary:
     "1. 10+ 年后端开发，懂前端，会运维。\n2. 熟练使用 Linux，能单人搭建一个项目需要的所有服务（包括各种中间件），且有基本的运维能力。\n3. 有架构设计经验，参与过多个系统从 0 到 1 的建设，熟悉微服务、大数据。\n4. 做过后台管理系统，应用监控系统，日志中心，交易系统，用户画像系统，用户行为分析系统，大数据平台，DevOps 等。\n5. Vibe coding。\n6. 目前全职远程 & 自由职业。",
   avatarUrl: "/picofme.png",
