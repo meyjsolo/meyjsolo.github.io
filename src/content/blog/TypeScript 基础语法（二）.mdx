@@ -1,0 +1,150 @@
+---
+title: "TypeScript 基础语法（二）"
+publishedAt: "2026-09-11"
+updatedAt: "2026-09-11"
+author: "小帅"
+summary: "TypeScript 基础语法。"
+---
+
+## 9. Object 类型
+
+```ts
+let user: {
+    name: string;
+    age: number;
+} = {
+    name: "Tom",
+    age: 20
+};
+```
+
+## 10. interface
+
+```ts
+interface User {
+    name: string;
+    age: number;
+}
+
+const user: User = {
+    name: "Tom",
+    age: 20
+};
+```
+
+## 11. interface 的可选属性
+
+```ts
+interface User {
+    name: string;
+    age?: number;
+}
+
+const user1: User = {
+    name: 'Tom'
+};
+
+const user2: User = {
+    name: 'Tome',
+    age: 20
+}
+```
+
+## 12. readonly
+
+```ts
+interface User {
+    readonly id: number;
+    name: string;
+}
+
+const user: User = {
+    id: 1,
+    name: "Tom"
+};
+
+// 可以修改
+user.name = "Jerry";
+// 禁止修改，类似于 Java 中的 final，只能赋值一次
+user.id = 2;
+```
+
+## 13. type
+
+```ts
+// 跟 interface 类似
+type User = {
+    name: string;
+    age: number;
+};
+
+const user: User = {
+    name: "Tom",
+    age: 20
+};
+
+// 比 interface 多出了 Alias 类型别名的作用
+type ID = string ｜ number;
+let id: ID;
+id = 'abc';
+id = 123;
+
+// Literal Type 别名
+type Status = 'pending' | 'success' | 'failed';
+let status: Status;
+status = 'pending';
+status = 'success';
+// status 不能用规定范围内的值赋值，例如
+status = 'hello';
+```
+
+## 14. Literal Type 字面量类型
+
+```ts
+let direction: 'left' | 'right';
+
+// direction 只能赋值 left 或者 right
+direction = 'left';
+direction = 'right';
+```
+
+## 15. enum
+
+```ts
+// enum 使用较少，更偏向使用字面量类型:
+// type Status = "PENDING" | "SUCCESS" | "FAILED";
+enum Status {
+    Pending,
+    Success,
+    Failed
+}
+let status: Status = Status.Pending;
+
+enum Status {
+    Pending = "PENDING",
+    Success = "SUCCESS",
+    Failed = "FAILED"
+}
+```
+
+## 16. 函数类型
+
+```ts
+let add: (a: number, b: number) => number;
+
+add = (a, b) => {
+    return a + b;
+};
+```
+
+## 17. 箭头函数
+
+```ts
+const add = (a: number, b: number): number => {
+    return a + b;
+};
+
+// 简写，方法体中只有一行代码，且代码是「表达式」的时候才能简写，而且会自动把表达式当成返回值
+// 甚至可以省略方法返回值的定义，ts 会自己推断
+const add = (a: number, b: number): number => a + b;
+```
