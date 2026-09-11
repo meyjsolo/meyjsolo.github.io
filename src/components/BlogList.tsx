@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from "react";
 import BlurFade from "@/components/magicui/blur-fade";
 import { ChevronRight } from "lucide-react";
 
@@ -9,21 +10,38 @@ interface Post {
   publishedAt: string;
 }
 
-interface Pagination {
-  page: number;
-  totalPages: number;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
-}
-
 interface BlogListProps {
   posts: Post[];
   allPostsCount: number;
-  pagination: Pagination;
   pageSize: number;
 }
 
-export default function BlogList({ posts, allPostsCount, pagination, pageSize }: BlogListProps) {
+export default function BlogList({ posts, allPostsCount, pageSize }: BlogListProps) {
+  const totalPages = Math.max(1, Math.ceil(posts.length / pageSize));
+
+  const [page, setPage] = useState(() => {
+    if (typeof window !== "undefined") {
+      const p = parseInt(new URLSearchParams(window.location.search).get("page") ?? "", 10);
+      if (!Number.isNaN(p) && p >= 1) return Math.min(p, totalPages);
+    }
+    return 1;
+  });
+
+  const paginatedPosts = useMemo(
+    () => posts.slice((page - 1) * pageSize, page * pageSize),
+    [posts, page, pageSize]
+  );
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (page === 1) {
+      url.searchParams.delete("page");
+    } else {
+      url.searchParams.set("page", String(page));
+    }
+    window.history.replaceState(null, "", url);
+  }, [page]);
+
   return (
     <section id="blog">
       <BlurFade delay={BLUR_FADE_DELAY}>
@@ -38,12 +56,12 @@ export default function BlogList({ posts, allPostsCount, pagination, pageSize }:
         </p>
       </BlurFade>
 
-      {posts.length > 0 ? (
+      {paginatedPosts.length > 0 ? (
         <>
           <BlurFade delay={BLUR_FADE_DELAY * 2}>
             <div className="flex flex-col gap-5">
-              {posts.map((post, id) => {
-                const indexNumber = (pagination.page - 1) * pageSize + id + 1;
+              {paginatedPosts.map((post, id) => {
+                const indexNumber = (page - 1) * pageSize + id + 1;
                 return (
                   <BlurFade delay={BLUR_FADE_DELAY * 3 + id * 0.05} key={post.id}>
                     <a
@@ -74,37 +92,29 @@ export default function BlogList({ posts, allPostsCount, pagination, pageSize }:
             </div>
           </BlurFade>
 
-          {pagination.totalPages > 1 && (
+          {totalPages > 1 && (
             <BlurFade delay={BLUR_FADE_DELAY * 4}>
               <div className="flex gap-3 flex-row items-center justify-between mt-8">
                 <div className="text-sm text-muted-foreground">
-                  Page {pagination.page} of {pagination.totalPages}
+                  Page {page} of {totalPages}
                 </div>
                 <div className="flex gap-2 sm:justify-end">
-                  {pagination.hasPreviousPage ? (
-                    <a
-                      href={`/blog?page=${pagination.page - 1}`}
-                      className="h-8 w-fit px-2 flex items-center justify-center text-sm border border-border rounded-lg hover:bg-accent/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    >
-                      Previous
-                    </a>
-                  ) : (
-                    <span className="h-8 w-fit px-2 flex items-center justify-center text-sm border border-border rounded-lg opacity-50 cursor-not-allowed">
-                      Previous
-                    </span>
-                  )}
-                  {pagination.hasNextPage ? (
-                    <a
-                      href={`/blog?page=${pagination.page + 1}`}
-                      className="h-8 w-fit px-2 flex items-center justify-center text-sm border border-border rounded-lg hover:bg-accent/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                    >
-                      Next
-                    </a>
-                  ) : (
-                    <span className="h-8 w-fit px-2 flex items-center justify-center text-sm border border-border rounded-lg opacity-50 cursor-not-allowed">
-                      Next
-                    </span>
-                  )}
+                  <button
+                    type="button"
+                    disabled={page === 1}
+                    onClick={() => setPage((p) => Math.max(1, p - 1))}
+                    className="h-8 w-fit px-2 flex items-center justify-center text-sm border border-border rounded-lg hover:bg-accent/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent cursor-pointer"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    type="button"
+                    disabled={page === totalPages}
+                    onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                    className="h-8 w-fit px-2 flex items-center justify-center text-sm border border-border rounded-lg hover:bg-accent/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent cursor-pointer"
+                  >
+                    Next
+                  </button>
                 </div>
               </div>
             </BlurFade>

@@ -101,12 +101,13 @@ export default function Navbar() {
                 </div>
               );
             }
-            const isExternal = social.url.startsWith("http");
+            const url = "url" in social ? social.url : "";
+            const isExternal = url.startsWith("http");
             return (
               <Tooltip key={`social-${name}-${index}`}>
                 <TooltipTrigger asChild>
                   <a
-                    href={social.url}
+                    href={url}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
                   >
