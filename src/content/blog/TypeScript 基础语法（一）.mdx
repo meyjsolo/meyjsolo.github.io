@@ -1,14 +1,14 @@
 ---
 title: "TypeScript 基础语法（一）"
 publishedAt: "2026-09-10"
-updatedAt: "2026-09-10"
+updatedAt: "2026-09-11"
 author: "小帅"
 summary: "TypeScript 基础语法。"
 ---
 
 ## 1. 类型声明
 
-```TypeScript
+```ts
 // 变量: 类型
 let name: string = 'Tom';
 let age: number = 20;
@@ -16,7 +16,7 @@ let age: number = 20;
 
 ## 2. TS 的基本类型
 
-```TypeScript
+```ts
 string
 number
 boolean
@@ -31,7 +31,7 @@ any
 
 ## 3. 类型推断
 
-```TypeScript
+```ts
 let name = 'Tom';
 let age = 20;
 
@@ -46,7 +46,7 @@ const age = 20;
 
 ## 4. 函数参数类型
 
-```TypeScript
+```ts
 function add(a: number, b: number): number {
     return a + b;
 }
@@ -54,7 +54,7 @@ function add(a: number, b: number): number {
 
 ## 5. 可选参数
 
-```TypeScript
+```ts
 // ? 表示这个参数可以不传
 // name?: string 等价于 name: string | undefined
 function hello(name?: string) {
@@ -64,7 +64,7 @@ function hello(name?: string) {
 
 ## 6. Union Type 联合类型
 
-```TypeScript
+```ts
 let value: string | number;
 
 // 下面两种赋值都合法，其他类型的赋值不合法
@@ -74,7 +74,7 @@ value = 123;
 
 ## 7. 数组
 
-```TypeScript
+```ts
 let names: string[] = ['Tome', 'Jerry'];
 
 let names: Array<string> = ['Tome', 'Jerry'];
@@ -89,32 +89,6 @@ let values: (string | number)[] = [
 
 ## 8. Tuple 元组
 
-```TypeScript
+```ts
 let user: [string, number] = ['Tom', 20];
-```
-
-## 9. Object 类型
-
-```TypeScript
-let user: {
-    name: string;
-    age: number;
-} = {
-    name: "Tom",
-    age: 20
-};
-```
-
-## 10. interface
-
-```TypeScript
-interface User {
-    name: string;
-    age: number;
-}
-
-const user: User = {
-    name: "Tom",
-    age: 20
-};
 ```
