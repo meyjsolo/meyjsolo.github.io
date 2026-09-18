@@ -121,7 +121,7 @@ export const DATA = {
         type: "qrcode",
         icon: Icons.wechat,
         navbar: true,
-        value: "/contact/wechat-qr.jpeg",
+        value: "/contact/wechat-qr.png",
       },
       QQ: {
         name: "QQ",
