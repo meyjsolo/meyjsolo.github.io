@@ -1,0 +1,203 @@
+---
+title: "TypeScript 基础语法（三）"
+publishedAt: "2026-09-18"
+updatedAt: "2026-09-18"
+author: "小帅"
+summary: "TypeScript 基础语法。"
+---
+
+## 18. class
+
+```ts
+class User {
+    name: string;
+    age: number;
+
+    constructor(name: string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+
+    hello(): void {
+        console.log(this.name);
+    }
+}
+
+const user = new User('Tom', 30);
+```
+
+## 19. public/private/protected
+
+```ts
+class User {
+    public name: string;
+    private password: string;
+    protected age: number;
+}
+```
+
+## 20. extends
+
+```ts
+class Animal {
+    name: string;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+}
+
+class Dog extends Animal {
+    bark() {
+        console.log("wang");
+    }
+}
+```
+
+## 21. implements
+
+```ts
+interface Animal {
+    name: string;
+    eat(): void;
+}
+
+class Dog implements Animal {
+    name: string;
+
+    constructor(name: string) {
+        this.name = name;
+    }
+
+    eat(): void {
+        console.log("eat");
+    }
+}
+```
+
+## 22. Generics 泛型
+
+```ts
+function identity<T>(value: T): T {
+    return value;
+}
+
+const a = identity<string>("hello");
+const b = identity<number>(123);
+```
+
+## 23. 泛型接口
+
+```ts
+interface Response<T> {
+    code: number;
+    message: string;
+    data: T;
+}
+
+const response: Response<User> = {
+    code: 200,
+    message: "success",
+    data: {
+        name: "Tom",
+        age: 20
+    }
+};
+```
+
+## 24. Type Narrowing 类型收窄
+
+```ts
+// 执行了 typeof 判断之后的变量，自动转成判断为 true 的类型
+function print(value: string | number) {
+    if (typeof value === "string") {
+        console.log(value.toUpperCase());
+    } else {
+        console.log(value.toFixed(2));
+    }
+}
+```
+
+## 25. unknown
+
+```ts
+let value: unknown;
+
+// 赋值可以
+value = "hello";
+value = 123;
+
+// 直接调用某种类型的方法不行
+value.toUpperCase();
+
+// 必须先判断类型之后才能调用，因此比 any 类型安全
+if (typeof value === "string") {
+    value.toUpperCase();
+}
+```
+
+## 26. void
+
+```ts
+function log(message: string): void {
+    console.log(message);
+}
+```
+
+## 27. never
+
+```ts
+// 这个函数永远不会正常返回
+
+function error(message: string): never {
+    throw new Error(message);
+}
+
+function fail(): never {
+    while (true) {
+    }
+}
+```
+
+## 28. Type Assertion 类型断言
+
+```ts
+const value: unknown = "hello";
+
+// 指定类型接收未指定类型的变量
+const name = value as string;
+```
+
+## 29. Optional Chaining
+
+```ts
+// user 存在就继续访问，否则返回 undefined，相当于 user && user.address && user.address.city
+user?.address?.city
+```
+
+## 30. Nullish Coalescing
+
+```ts
+// 如果 user.name 是 null 或者 undefined，就使用 'Unknown'，也就是变量不存在的时候指定默认值
+// ?? 只针对 null 和 undefined，其他 js 中当成 false 的值不支持
+// 这个跟上面的 Optional Chaining 应该经常结合在一起使用
+const name = user.name ?? "Unknown";
+```
+
+## 31. Structural Typing
+
+```ts
+interface User {
+    name: string;
+}
+
+const person = {
+    name: "Tom"
+};
+
+/* 
+    person 的结构符合 User，就可以当成 User 的实例，并不一定要通过 User 创建
+    这也是和 java 的区别，ts 是结构类型（Structural Typing），java 是名义类型（Nominal Typing）
+*/
+const user: User = person;
+```
